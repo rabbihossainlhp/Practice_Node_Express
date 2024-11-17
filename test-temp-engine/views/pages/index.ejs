@@ -1,0 +1,20 @@
+    <%- include("../partials/head.ejs",{titleDoc:"home page"}) %>
+    <%- include("../partials/nav.ejs") %>
+    <%- include("../partials/header.ejs") %>
+
+    <h2> <%= title %> </h2>
+    <h1>First Templete with EJs</h1>
+
+    <% if(post.published){%>
+        <% for(P of posts){%>
+            <h2><%= P.title %></h2>
+            <h5>By___<%= P.authorS %></h5>
+            <%} %>
+        
+        <%}else{%>
+            <h1>Post is not published yet.....</h1>
+            <%}%>
+
+
+    <%- include("../partials/footer.ejs") %>
+    <%- include("../partials/foot.ejs") %>
