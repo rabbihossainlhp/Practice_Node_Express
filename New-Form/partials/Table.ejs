@@ -1,0 +1,70 @@
+<div class="tableBox">
+    <table>
+        <caption></caption>
+        <tr>
+            <th scope="col">Name:</th>
+            <th scope="col">Country:</th>
+            <th scope="col">Age:</th>
+            <th scope="col">Phone:</th>
+            <th scope="col">Email:</th>
+            <th scope="col">Options</th>
+        </tr>
+        <% for(let contact of contacts){%>
+            <tr>
+                <td> <%= contact.Name %> </td>
+                <td> <%= contact.Country %> </td>
+                <td> <%= contact.Age %> </td>
+                <td> <%= contact.Phone %> </td>
+                <td> <%= contact.Email %> </td>  
+                <td>
+                    <button class="edit-btn"
+                    data-name="<%= contact.Name %>"
+                    data-country="<%= contact.Country %>"
+                    data-age="<%= contact.Age %>"
+                    data-phone="<%= contact.Phone %>"
+                    data-email="<%= contact.Email %>"
+                    data-id="<%= contact._id %>"
+                    >
+                    Edit
+                    </button>
+                    <a href="/contacts/delete/<%= contact._id %>">Delete</a>
+                </td>
+
+            </tr>
+        <%} %>
+    </table>
+</div>
+<script>
+    window.onload = function(){
+        let EditBtn = document.getElementsByClassName("edit-btn");
+        let Form = document.querySelector(".contact-form");
+        
+
+        [...EditBtn].forEach((e)=>{
+            e.addEventListener("click",(el)=>{
+                // console.log(el.target.dataset);
+                Form[0].value = el.target.dataset.name;
+                Form[1].value = el.target.dataset.country;
+                Form[2].value = el.target.dataset.age;
+                Form[3].value = el.target.dataset.phone;
+                Form[4].value = el.target.dataset.email; 
+                Form[6].innerText = "Update";
+                
+                //add reset btn
+                if(!document.querySelector(".reset-btn")){
+                    let getPlace = document.querySelector(".contact-form");
+                    let Reset = document.createElement("button");
+                    Reset.classList.add("reset-btn");
+                    Reset.innerText = "Reset";
+                    Reset.type = "reset";
+                    getPlace.appendChild(Reset);
+                }
+                let getFormId = document.querySelector(".contact-id");
+                getFormId.value = el.target.dataset.id;
+
+            })
+        })
+
+    }
+    
+</script>
